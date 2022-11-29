@@ -3,9 +3,10 @@ import * as fromApp from '@app/app.state';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
-import { Signup } from '@authSt/auth.actions';
+
 import { signUpForm } from '@constants/auth-forms';
 import { Store } from '@ngrx/store';
+import { AuthActions } from '@authSt/action-types';
 
 @Component({
   selector: 'app-signup',
@@ -35,9 +36,13 @@ export class SignupComponent {
     };
 
     this._store.dispatch(
-      Signup({
+      AuthActions.Signup({
         payload: user,
       })
     );
+  }
+
+  public loginWithGoogleHandler(): void {
+    this._store.dispatch(AuthActions.LoginWithGoogle());
   }
 }

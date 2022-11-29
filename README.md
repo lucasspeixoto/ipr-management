@@ -22,7 +22,7 @@ O projeto Foi desenvolvido com as seguintes tecnologias:
 
 <!-- ![caption](src/assets/presentation.gif) -->
 
-![interface](src/assets/img/layout.png 'Layout Atual')
+![interface](src/assets/images/layout.png 'Layout Atual')
 
 ## 🚀 Instalação
 

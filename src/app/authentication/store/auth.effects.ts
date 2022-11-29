@@ -27,6 +27,7 @@ import { loadTasks } from '@tasksSt/tasks.actions';
 import * as auth from 'firebase/auth';
 
 import { AuthActions } from './action-types';
+import { appRoutes } from '@app/config/routes/app-routes';
 
 @Injectable()
 export class AuthEffects {
@@ -53,7 +54,7 @@ export class AuthEffects {
                 this._store.dispatch(
                   AuthActions.SetUserData({ payload: loggedUser })
                 );
-                this._router.navigateByUrl('/home');
+                this._router.navigateByUrl(appRoutes.HOME);
                 this._store.dispatch(StopLoading());
                 this._snackBarService.openSuccessSnackBar(
                   'Bem vindo ao Plataforma IPR 😁'
@@ -112,7 +113,7 @@ export class AuthEffects {
                   );
                 }
 
-                this._router.navigateByUrl('/home');
+                this._router.navigateByUrl(appRoutes.HOME);
                 this._store.dispatch(StopLoading());
                 this._snackBarService.openSuccessSnackBar(
                   'Bem vindo ao Plataforma IPR 😁'

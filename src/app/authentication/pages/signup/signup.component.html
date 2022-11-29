@@ -54,6 +54,14 @@
       [disabled]="signupForm.invalid">
       Cadastrar
     </button>
+    <button
+      class="form__actions-login google-button"
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="loginWithGoogleHandler()">
+      Cadastro com Google
+    </button>
     <div class="form__actions-container">
       <button class="form__actions-login" mat-button routerLink="/">
         Login

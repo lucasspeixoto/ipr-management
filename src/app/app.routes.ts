@@ -11,7 +11,13 @@ export const appRoutes: Routes = [
       ),
   },
   {
-    path: 'bills',
+    path: 'inicio',
+    loadChildren: () =>
+      import('./features/home/home.module').then(m => m.HomeModule),
+    canLoad: [AuthGuard],
+  },
+  {
+    path: 'meu-cadastro',
     loadChildren: () =>
       import('./features/bills/bills.module').then(m => m.BillsModule),
     canLoad: [AuthGuard],
