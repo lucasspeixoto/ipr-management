@@ -1,0 +1,71 @@
+<button
+  class="notification-button"
+  mat-mini-fab
+  *ngIf="
+    notificationsAmount$ | async as notificationsAmount;
+    else emptyNotification
+  "
+  [matMenuTriggerFor]="bell">
+  <mat-icon
+    [matBadge]="notificationsAmount"
+    matBadgeColor="warn"
+    class="notification-button__icon">
+    notifications_none
+  </mat-icon>
+</button>
+<ng-template #emptyNotification>
+  <button class="notification-button" mat-mini-fab [matMenuTriggerFor]="none">
+    <mat-icon matBadgeColor="warn" class="notification-button__icon">
+      notifications_none
+    </mat-icon>
+  </button>
+</ng-template>
+
+<mat-menu #bell="matMenu" xPosition="before" class="notification-menu">
+  <p class="notification-menu__title">Contas</p>
+
+  <ng-container *ngIf="billsNotifications$ | async as billsNotifications">
+    <ng-container
+      *ngFor="let billsDescription of billsNotifications.description">
+      <button
+        *ngIf="billsDescription.value > 0"
+        mat-menu-item
+        class="notification-menu__button">
+        <mat-icon [class]="billsDescription.class">{{
+          billsDescription.icon
+        }}</mat-icon>
+        {{ billsDescription.message }}
+      </button>
+    </ng-container>
+  </ng-container>
+
+  <mat-divider></mat-divider>
+
+  <p class="notification-menu__title">Tarefas</p>
+
+  <ng-container *ngIf="tasksNotifications$ | async as tasksNotifications">
+    <ng-container
+      *ngFor="let tasksNotification of tasksNotifications.description">
+      <button
+        *ngIf="tasksNotification.value > 0"
+        mat-menu-item
+        class="notification-menu__button">
+        <mat-icon [class]="tasksNotification.class">{{
+          tasksNotification.icon
+        }}</mat-icon>
+        {{ tasksNotification.message }}
+      </button>
+    </ng-container>
+  </ng-container>
+</mat-menu>
+
+<mat-menu #none="matMenu" xPosition="before" class="notification-menu">
+  <ng-container>
+    <button mat-menu-item class="notification-menu__button">
+      <mat-icon class="notification-menu__icon_blue"
+        >notifications_none</mat-icon
+      >
+      Nenhuma Notificação
+    </button>
+  </ng-container>
+</mat-menu>

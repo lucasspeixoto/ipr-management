@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    margin-bottom: 0.7rem;
+  }
+
+  &__actions {
+    &-login {
+      margin-top: .4rem;
+      margin-bottom: .4rem;
+    }
+
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      margin-bottom: 0.2rem;
+    }
+  }
+}

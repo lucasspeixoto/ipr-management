@@ -1,0 +1,37 @@
+<ng-container *ngIf="user$ | async as user">
+  <button class="user-button" mat-mini-fab [matMenuTriggerFor]="userMenu">
+    <mat-icon class="user-button__icon">person</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <div class="user-menu-title">
+      <h4 class="user-menu-title__name">{{ user?.name }}</h4>
+      <a
+        class="user-menu-title__link"
+        href="https://lucasspeixoto.github.io/profile"
+        target="_blank"
+        >{{ user?.email }}</a
+      >
+    </div>
+
+    <div mat-menu-item>
+      <mat-icon>date_range</mat-icon>{{ today | date : 'dd/MM/yyyy - HH:mm' }}
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button
+      mat-menu-item
+      class="user-menu__item-title"
+      *ngFor="let menuItem of menuItems"
+      [routerLink]="menuItem.routerLink">
+      <mat-icon class="user-menu-icon">{{ menuItem.icon }}</mat-icon
+      >{{ menuItem.label }}
+    </button>
+
+    <div class="sign-button-wrapper">
+      <button class="sign-button" mat-flat-button (click)="signOutEmit()">
+        Sair
+      </button>
+    </div>
+  </mat-menu>
+</ng-container>

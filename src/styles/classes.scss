@@ -1,0 +1,132 @@
+@import 'colors';
+@import 'font';
+@import 'variables';
+
+.app-button {
+  font-size: 15px;
+  transition: all 0.1s;
+  &:hover:not(:disabled) {
+    background: $blue;
+    transform: scale(1.01);
+  }
+}
+
+.google-button {
+  font-size: 15px;
+  transition: all 0.1s;
+  &:hover:not(:disabled) {
+    background: $dark-pink;
+    transform: scale(1.01);
+  }
+}
+
+.authentication_layout {
+  &__card {
+    width: 30vw;
+    border-radius: $borderRadius;
+
+    > h3 {
+      color: $blue;
+      margin-bottom: 2rem;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    @media screen and (min-width: map-get($auth-card-breakpoints, xxl)) {
+      width: 30vw;
+    }
+
+    @media screen and (min-width: map-get($auth-card-breakpoints, lg)) and (max-width: map-get($auth-card-breakpoints, xl)) {
+      width: 40vw;
+    }
+
+    @media screen and (min-width: map-get($auth-card-breakpoints, md)) and (max-width: map-get($auth-card-breakpoints, lg)) {
+      width: 65vw;
+    }
+
+    @media screen and (min-width: map-get($auth-card-breakpoints, sm)) and (max-width: map-get($auth-card-breakpoints, md)) {
+      width: 75vw;
+    }
+
+    @media screen and (max-width: map-get($auth-card-breakpoints, sm)) {
+      width: 92vw;
+    }
+  }
+
+  &__copyright {
+    position: absolute;
+    bottom: 2rem;
+    color: $white;
+    z-index: 1;
+  }
+}
+
+//* Snackbar alerts colors
+.green-snackbar {
+  background: $green !important;
+  color: $white !important;
+}
+.green-snackbar button {
+  background-color: $green !important;
+  color: $white !important;
+  border: none !important;
+}
+.red-snackbar {
+  background: $dark-pink !important;
+  color: $white !important;
+}
+.red-snackbar button {
+  background-color: $dark-pink !important;
+  color: $white !important;
+  border: none !important;
+}
+
+// * Bill status color
+.late {
+  background-color: $dark-pink !important;
+}
+
+.today {
+  background-color: $yellow !important;
+}
+
+.inDay {
+  background-color: $green !important;
+}
+
+// * Post-it colors
+.yellowPostit {
+  background: $postit-yellow !important;
+}
+
+.bluePostit {
+  background: $postit-blue !important;
+}
+
+.pinkPostit {
+  background: $postit-pink !important;
+}
+
+.purplePostit {
+  background: $postit-purple !important;
+}
+
+.greenPostit {
+  background: $postit-green !important;
+}
+
+.orangePostit {
+  background: $postit-orange !important;
+}
+
+.goldPostit {
+  background: $postit-gold !important;
+}
+
+.redPostit {
+  background: $postit-red !important;
+}
+
+.whitePostit {
+  background: $postit-white !important;
+}

@@ -1,0 +1,100 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@envs/*": ["src/environments/*"],
+
+      "@assets/*": ["src/assets/*"],
+
+      "@styles/*": ["src/styles/*"],
+
+      "@app/*": ["src/app/*"],
+
+      "@config/*": ["src/app/config/*"],
+      "@constants/*": ["src/app/config/constants/*"],
+      "@routes/*": ["src/app/config/routes/*"],
+
+      "@layout/*": ["src/app/layout/*"],
+
+      "@auth/*": ["src/app/authentication/*"],
+      "@authL/*": ["src/app/authentication/layout/*"],
+      "@authP/*": ["src/app/authentication/pages/*"],
+      "@authS/*": ["src/app/authentication/services/*"],
+      "@authSt/*": ["src/app/authentication/store/*"],
+      "@authMd/*": ["src/app/authentication/models/*"],
+      "@authG/*": ["src/app/authentication/guards/*"],
+
+      "@shared/*": ["src/app/shared/*"],
+      "@sharedM/*": ["src/app/shared/modules/*"],
+      "@sharedC/*": ["src/app/shared/components/*"],
+      "@sharedD/*": ["src/app/shared/directives/*"],
+      "@sharedP/*": ["src/app/shared/pipes/*"],
+      "@sharedS/*": ["src/app/shared/services/*"],
+      "@sharedSt/*": ["src/app/shared/store/*"],
+      "@sharedMd/*": ["src/app/shared/models/*"],
+      "@sharedH/*": ["src/app/shared/helpers/*"],
+      "@sharedMs/*": ["src/app/shared/messages/*"],
+
+      "@features/*": ["src/app/features/*"],
+
+      "@billsC/*": ["src/app/features/bills/components/*"],
+      "@billsP/*": ["src/app/features/bills/pages/*"],
+      "@billsMd/*": ["src/app/features/bills/models/*"],
+      "@billsS/*": ["src/app/features/bills/services/*"],
+      "@billsSt/*": ["src/app/features/bills/store/*"],
+      "@billsH/*": ["src/app/features/bills/helpers/*"],
+
+      "@plansC/*": ["src/app/features/plans/components/*"],
+      "@plansP/*": ["src/app/features/plans/pages/*"],
+      "@plansMd/*": ["src/app/features/plans/models/*"],
+      "@plansS/*": ["src/app/features/plans/services/*"],
+      "@plansSt/*": ["src/app/features/plans/store/*"],
+      "@plansH/*": ["src/app/features/plans/helpers/*"],
+
+      "@tasksC/*": ["src/app/features/tasks/components/*"],
+      "@tasksP/*": ["src/app/features/tasks/pages/*"],
+      "@tasksMd/*": ["src/app/features/tasks/models/*"],
+      "@tasksS/*": ["src/app/features/tasks/services/*"],
+      "@tasksSt/*": ["src/app/features/tasks/store/*"],
+      "@tasksH/*": ["src/app/features/tasks/helpers/*"],
+
+      "@reportsC/*": ["src/app/features/reports/components/*"],
+      "@reportsP/*": ["src/app/features/reports/pages/*"],
+      "@reportsMd/*": ["src/app/features/reports/models/*"],
+      "@reportsS/*": ["src/app/features/reports/services/*"],
+      "@reportsSt/*": ["src/app/features/reports/store/*"],
+      "@reportsH/*": ["src/app/features/reports/helpers/*"],
+
+      "@profileC/*": ["src/app/features/profile/components/*"],
+      "@profileP/*": ["src/app/features/profile/pages/*"],
+      "@profileMd/*": ["src/app/features/profile/models/*"],
+      "@profileS/*": ["src/app/features/profile/services/*"],
+      "@profileSt/*": ["src/app/features/profile/store/*"],
+      "@profileH/*": ["src/app/features/profile/helpers/*"]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": ["es2020", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
