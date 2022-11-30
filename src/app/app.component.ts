@@ -9,6 +9,7 @@ import * as fromApp from '@app/app.state';
 import { getIsLoading } from '@sharedSt/loading/loading.selectors';
 
 import { MY_DATE_FORMATS } from '@constants/dates';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent {
    * @type Observable<boolean>
    *
    */
-  public readonly isLoading$ = this._store.select(getIsLoading);
+  public readonly isLoading$: Observable<boolean> =
+    this._store.select(getIsLoading);
 
   constructor(private readonly _store: Store<fromApp.AppState>) {}
 }

@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -37,6 +38,7 @@ const MODULES = [
   MatDatepickerModule,
   MatRadioModule,
   DragDropModule,
+  MatStepperModule,
 ];
 
 const DATE_PROVIDERS = [MatDatepickerModule, MatNativeDateModule];

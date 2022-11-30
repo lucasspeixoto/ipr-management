@@ -1,5 +1,9 @@
 <app-authentication-layout [title]="'Login'">
-  <form class="form" id="form" [formGroup]="loginForm" (submit)="handleLogin()">
+  <form
+    class="form"
+    id="loginForm"
+    [formGroup]="loginForm"
+    (submit)="userLoginHandler()">
     <mat-form-field class="form__input form__input-field" appearance="fill">
       <mat-label>E-mail</mat-label>
       <input matInput type="text" formControlName="email" required />

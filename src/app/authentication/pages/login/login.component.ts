@@ -19,14 +19,22 @@ export class LoginComponent {
 
   public loginForm = this._formBuilder.group({ ...loginForm });
 
-  public readonly year = new Date().getFullYear();
-
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _store: Store<fromApp.AppState>
   ) {}
 
-  public handleLogin(): void {
+  /**
+   * @name userLoginHandler
+   * @description
+   * User login handler for get user data (email and password)
+   * from form and and dispatch the Login action with user payload
+   * @params None
+   * @access public
+   * @return void
+   *
+   */
+  public userLoginHandler(): void {
     const { email, password } = this.loginForm.value;
 
     const user = {
@@ -37,6 +45,16 @@ export class LoginComponent {
     this._store.dispatch(AuthActions.Login({ payload: user }));
   }
 
+  /**
+   * @name loginWithGoogleHandler
+   * @description
+   * User login with google handler for dispatch
+   * the LoginWithGoogle action
+   * @params None
+   * @access public
+   * @return void
+   *
+   */
   public loginWithGoogleHandler(): void {
     this._store.dispatch(AuthActions.LoginWithGoogle());
   }

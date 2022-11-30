@@ -26,9 +26,11 @@ $angular-material-admin-accent: mat-palette($mat-pink, A200, A100, A400);
 $angular-material-admin-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$angular-material-admin-theme: mat-light-theme($angular-material-admin-primary,
-    $angular-material-admin-accent,
-    $angular-material-admin-warn);
+$angular-material-admin-theme: mat-light-theme(
+  $angular-material-admin-primary,
+  $angular-material-admin-accent,
+  $angular-material-admin-warn
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -50,7 +52,8 @@ $ama-yellow: (
   A200: $yellow,
   A400: $yellow,
   A700: $yellow,
-  contrast: (50: $dark-primary-text,
+  contrast: (
+    50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
     300: $dark-primary-text,
@@ -78,7 +81,8 @@ $ama-pink: (
   700: $pink,
   800: $pink,
   900: $pink,
-  contrast: (50: $dark-primary-text,
+  contrast: (
+    50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
     300: $dark-primary-text,
@@ -110,7 +114,8 @@ $ama-blue: (
   A200: $blue,
   A400: $blue,
   A700: $blue,
-  contrast: (50: $dark-primary-text,
+  contrast: (
+    50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
     300: $dark-primary-text,
@@ -132,7 +137,6 @@ $ama-accent: mat-palette($ama-yellow);
 $ama-warn: mat-palette($ama-pink);
 $ama-theme: mat-light-theme($ama-primary, $ama-accent, $ama-warn);
 @include angular-material-theme($ama-theme);
-
 
 .mat-radio-label {
   padding-right: 8px;
@@ -178,6 +182,11 @@ mat-select.mat-select {
 
 .mat-form-field-underline {
   display: none;
+}
+
+.mat-horizontal-stepper-wrapper {
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .mat-h1,

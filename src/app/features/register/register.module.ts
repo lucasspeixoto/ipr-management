@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
+
+import { EffectsModule } from '@ngrx/effects';
 import { LayoutModule } from '@layout/layout.module';
 import { MaterialModule } from '@sharedM/material.module';
 import { NgModule } from '@angular/core';
-import { ProfileComponent } from './pages/profile/profile.component';
+
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@sharedM/shared.module';
+import { RegisterComponent } from './pages/register/register.component';
 
-const profileRoutes = [{ path: '', component: ProfileComponent }];
+const routes = [{ path: '', component: RegisterComponent }];
 
 @NgModule({
   imports: [
@@ -14,8 +17,10 @@ const profileRoutes = [{ path: '', component: ProfileComponent }];
     MaterialModule,
     SharedModule,
     LayoutModule,
-    RouterModule.forChild(profileRoutes),
+    RouterModule.forChild(routes),
+    EffectsModule.forFeature([]),
   ],
-  declarations: [ProfileComponent],
+  declarations: [RegisterComponent],
+  providers: [],
 })
-export class ProfileModule {}
+export class RegisterModule {}

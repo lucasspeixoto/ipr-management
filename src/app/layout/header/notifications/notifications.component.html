@@ -1,13 +1,6 @@
-<button
-  class="notification-button"
-  mat-mini-fab
-  *ngIf="
-    notificationsAmount$ | async as notificationsAmount;
-    else emptyNotification
-  "
-  [matMenuTriggerFor]="bell">
+<button class="notification-button" mat-mini-fab [matMenuTriggerFor]="bell">
   <mat-icon
-    [matBadge]="notificationsAmount"
+    [matBadge]="2"
     matBadgeColor="warn"
     class="notification-button__icon">
     notifications_none
@@ -24,7 +17,7 @@
 <mat-menu #bell="matMenu" xPosition="before" class="notification-menu">
   <p class="notification-menu__title">Contas</p>
 
-  <ng-container *ngIf="billsNotifications$ | async as billsNotifications">
+  <!-- <ng-container *ngIf="billsNotifications$ | async as billsNotifications">
     <ng-container
       *ngFor="let billsDescription of billsNotifications.description">
       <button
@@ -37,13 +30,13 @@
         {{ billsDescription.message }}
       </button>
     </ng-container>
-  </ng-container>
+  </ng-container> -->
 
   <mat-divider></mat-divider>
 
   <p class="notification-menu__title">Tarefas</p>
 
-  <ng-container *ngIf="tasksNotifications$ | async as tasksNotifications">
+  <!-- <ng-container *ngIf="tasksNotifications$ | async as tasksNotifications">
     <ng-container
       *ngFor="let tasksNotification of tasksNotifications.description">
       <button
@@ -56,7 +49,7 @@
         {{ tasksNotification.message }}
       </button>
     </ng-container>
-  </ng-container>
+  </ng-container> -->
 </mat-menu>
 
 <mat-menu #none="matMenu" xPosition="before" class="notification-menu">

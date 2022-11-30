@@ -8,8 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '@authSt/auth.effects';
 import { AuthenticationService } from '@authS/authentication.service';
 
-import { BillsEffects } from '@billsSt/bills.effects';
-
 import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 import { LayoutComponent } from '@layout/layout.component';
@@ -21,7 +19,6 @@ import { UserComponent } from '@layout/header/user/user.component';
 import { MaterialModule } from '@sharedM/material.module';
 import { MessageEffects } from '@sharedSt/message/message.effects';
 import { SharedModule } from '@sharedM/shared.module';
-import { TasksEffects } from '@tasksSt/tasks.effects';
 
 const MODULES = [
   CommonModule,
@@ -42,7 +39,7 @@ const COMPONENTS = [
   FooterComponent,
 ];
 
-const EFFECTS = [AuthEffects, BillsEffects, MessageEffects, TasksEffects];
+const EFFECTS = [AuthEffects, MessageEffects];
 
 @NgModule({
   declarations: [...COMPONENTS],

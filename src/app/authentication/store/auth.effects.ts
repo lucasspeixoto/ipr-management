@@ -13,16 +13,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as fromApp from '@app/app.state';
 
-import { clearBillData, loadBills } from '@billsSt/bills.actions';
-
 import { AuthenticationService } from '@authS/authentication.service';
 import { User } from '@authMd/user.model';
 
 import { StartLoading, StopLoading } from '@sharedSt/loading/loading.actions';
 import { Messages } from '@shared/messages/firebase';
 import { SnackbarService } from '@sharedS/snackbar/snackbar.service';
-
-import { loadTasks } from '@tasksSt/tasks.actions';
 
 import * as auth from 'firebase/auth';
 
@@ -252,7 +248,7 @@ export class AuthEffects {
             this._router.navigateByUrl('/');
             this._store.dispatch(StopLoading());
             this._snackBarService.openSuccessSnackBar('Volte Sempre 😁');
-            this._store.dispatch(clearBillData());
+            //this._store.dispatch(clearBillData());
           });
         })
       ),
@@ -279,8 +275,8 @@ export class AuthEffects {
               this._store.dispatch(
                 AuthActions.SetUserData({ payload: loggedUser })
               );
-              this._store.dispatch(loadBills({ payload: uid }));
-              this._store.dispatch(loadTasks({ payload: uid }));
+              //this._store.dispatch(loadBills({ payload: uid }));
+              //this._store.dispatch(loadTasks({ payload: uid }));
             }
 
             const isLogged = user !== null ? true : false;

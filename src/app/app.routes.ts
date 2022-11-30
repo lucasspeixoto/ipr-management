@@ -19,31 +19,7 @@ export const appRoutes: Routes = [
   {
     path: 'meu-cadastro',
     loadChildren: () =>
-      import('./features/bills/bills.module').then(m => m.BillsModule),
-    canLoad: [AuthGuard],
-  },
-  {
-    path: 'plans',
-    loadChildren: () =>
-      import('./features/plans/plans.module').then(m => m.PlansModule),
-    canLoad: [AuthGuard],
-  },
-  {
-    path: 'reports',
-    loadChildren: () =>
-      import('./features/reports/reports.module').then(m => m.ReportsModule),
-    canLoad: [AuthGuard],
-  },
-  {
-    path: 'tasks',
-    loadChildren: () =>
-      import('./features/tasks/tasks.module').then(m => m.TasksModule),
-    canLoad: [AuthGuard],
-  },
-  {
-    path: 'profile',
-    loadChildren: () =>
-      import('./features/profile/profile.module').then(m => m.ProfileModule),
+      import('./features/register/register.module').then(m => m.RegisterModule),
     canLoad: [AuthGuard],
   },
   {
