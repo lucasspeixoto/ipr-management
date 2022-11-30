@@ -28,8 +28,7 @@ export class AppComponent {
    * @type Observable<boolean>
    *
    */
-  public readonly isLoading$: Observable<boolean> =
-    this._store.select(getIsLoading);
+  public readonly isLoading$: Observable<boolean> = this._store.select(getIsLoading);
 
   constructor(private readonly _store: Store<fromApp.AppState>) {}
 }

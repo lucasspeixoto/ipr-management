@@ -6,14 +6,11 @@ export const appRoutes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./authentication/authentication.module').then(
-        m => m.AuthenticationModule
-      ),
+      import('./authentication/authentication.module').then(m => m.AuthenticationModule),
   },
   {
     path: 'inicio',
-    loadChildren: () =>
-      import('./features/home/home.module').then(m => m.HomeModule),
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
     canLoad: [AuthGuard],
   },
   {

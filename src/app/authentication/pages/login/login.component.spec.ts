@@ -69,7 +69,7 @@ describe('LoginComponent', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(
       Object({
         payload: Object({ ...payload }),
-        type: '[Login Page] User Login',
+        type: AuthActions.Actions.LOGIN,
       })
     );
   });

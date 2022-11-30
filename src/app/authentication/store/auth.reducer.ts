@@ -1,10 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
-  Logout,
-  SetUserData,
-  Signup,
-  UpdateIsLoggedStatus,
-} from './auth.actions';
+import { Logout, SetUserData, Signup, UpdateIsLoggedStatus } from './auth.actions';
 
 import { User } from '@authMd/user.model';
 
@@ -49,7 +44,5 @@ const _authReducer = createReducer(
   })
 );
 
-export const authReducer = (
-  state: AuthState | undefined,
-  action: Action
-): AuthState => _authReducer(state, action);
+export const authReducer = (state: AuthState | undefined, action: Action): AuthState =>
+  _authReducer(state, action);

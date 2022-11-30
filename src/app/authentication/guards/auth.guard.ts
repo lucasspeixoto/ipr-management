@@ -27,11 +27,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.isAuth().pipe(
       tap(user => {
         if (!user) {
@@ -44,11 +40,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   public canLoad(
     route: Route,
     segments: UrlSegment[]
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.isAuth().pipe(
       tap(user => {
         if (!user) {

@@ -19,17 +19,11 @@ export enum Actions {
   LOAD_USER_SUCCESS = '[App Component] Load logged user Success',
 }
 
-export const Login = createAction(
-  Actions.LOGIN,
-  props<{ payload: LoginForm }>()
-);
+export const Login = createAction(Actions.LOGIN, props<{ payload: LoginForm }>());
 
 export const LoginWithGoogle = createAction(Actions.LOGIN_WITH_GOOGLE);
 
-export const Signup = createAction(
-  Actions.SIGNUP,
-  props<{ payload: SignUpForm }>()
-);
+export const Signup = createAction(Actions.SIGNUP, props<{ payload: SignUpForm }>());
 
 export const SendEmailVerification = createAction(Actions.EMAIL_VERIFICATION);
 

@@ -8,8 +8,7 @@ export const Messages: Record<string, string> = {
   'auth/email-already-in-use':
     'O e-mail fornecido já está em uso por outro usuário. Cada usuário precisa ter um e-mail exclusivo.',
 
-  'auth/id-token-expired':
-    'O token de código do Firebase provisionado expirou.',
+  'auth/id-token-expired': 'O token de código do Firebase provisionado expirou.',
 
   'auth/id-token-revoked': 'O token de ID do Firebase foi revogado.',
 
@@ -58,8 +57,7 @@ export const Messages: Record<string, string> = {
   'auth/invalid-hash-derived-key-length':
     'O tamanho da chave derivada do hash precisa ser um número válido.',
 
-  'auth/invalid-hash-key':
-    'A chave de hash precisa ter um buffer de byte válido.',
+  'auth/invalid-hash-key': 'A chave de hash precisa ter um buffer de byte válido.',
 
   'auth/invalid-hash-memory-cost':
     'O custo da memória hash precisa ser um número válido.',
@@ -67,8 +65,7 @@ export const Messages: Record<string, string> = {
   'auth/invalid-hash-parallelization':
     'O carregamento em paralelo do hash precisa ser um número válido.',
 
-  'auth/invalid-hash-rounds':
-    'O arredondamento de hash precisa ser um número válido.',
+  'auth/invalid-hash-rounds': 'O arredondamento de hash precisa ser um número válido.',
 
   'auth/invalid-hash-salt-separator':
     'O campo do separador de salt do algoritmo de geração de hash precisa ser um buffer de byte válido.',
@@ -85,11 +82,9 @@ export const Messages: Record<string, string> = {
   'auth/invalid-password':
     'O valor fornecido para a propriedade do usuário password é inválido. Precisa ser uma string com pelo menos seis caracteres.',
 
-  'auth/invalid-password-hash':
-    'O hash da senha precisa ser um buffer de byte válido.',
+  'auth/invalid-password-hash': 'O hash da senha precisa ser um buffer de byte válido.',
 
-  'auth/invalid-password-salt':
-    'O salt da senha precisa ser um buffer de byte válido.',
+  'auth/invalid-password-salt': 'O salt da senha precisa ser um buffer de byte válido.',
 
   'auth/invalid-phone-number':
     'O valor fornecido para phoneNumber é inválido. Ele precisa ser uma string de identificador compatível com o padrão E.164 não vazio.',
@@ -112,8 +107,7 @@ export const Messages: Record<string, string> = {
   'auth/invalid-uid':
     'O uid fornecido precisa ser uma string não vazia com no máximo 128 caracteres.',
 
-  'auth/invalid-user-import':
-    'O registro do usuário a ser importado é inválido.',
+  'auth/invalid-user-import': 'O registro do usuário a ser importado é inválido.',
 
   'auth/maximum-user-count-exceeded':
     'O número máximo permitido de usuários a serem importados foi excedido.',
@@ -129,8 +123,7 @@ export const Messages: Record<string, string> = {
 
   'auth/missing-ios-bundle-id': 'A solicitação está sem o ID do pacote do iOS.',
 
-  'auth/missing-uid':
-    'Um identificador uid é necessário para a operação atual.',
+  'auth/missing-uid': 'Um identificador uid é necessário para a operação atual.',
 
   'auth/missing-oauth-client-secret':
     'A chave secreta do cliente de configuração do OAuth é necessária para ativar o fluxo de código do OIDC.',
@@ -147,8 +140,7 @@ export const Messages: Record<string, string> = {
   'auth/reserved-claims':
     'Uma ou mais declarações de usuário personalizadas fornecidas para setCustomUserClaims() são reservadas. Por exemplo, não use as declarações específicas do OIDC, como sub, iat, iss, exp, aud, auth_time etc., como chaves para declarações personalizadas.',
 
-  'auth/session-cookie-expired':
-    'O cookie da sessão do Firebase fornecido expirou.',
+  'auth/session-cookie-expired': 'O cookie da sessão do Firebase fornecido expirou.',
 
   'auth/session-cookie-revoked': 'O cookie da sessão do Firebase foi revogado.',
 

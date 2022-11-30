@@ -1,8 +1,6 @@
 <app-layout>
   <mat-stepper #stepper class="register">
-    <mat-step
-      [stepControl]="firstFormGroup"
-      errorMessage="Envio não realizado!">
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Envio não realizado!">
       <form [formGroup]="firstFormGroup" class="register__form">
         <ng-template matStepLabel>Dados Pessoais</ng-template>
         <mat-form-field appearance="fill">
@@ -18,9 +16,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step
-      [stepControl]="secondFormGroup"
-      errorMessage="Envio não realizado!">
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Envio não realizado!">
       <form [formGroup]="secondFormGroup" class="register__form">
         <ng-template matStepLabel>Dados Complementares</ng-template>
         <mat-form-field appearance="fill">

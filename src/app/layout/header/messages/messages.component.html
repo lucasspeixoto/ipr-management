@@ -4,43 +4,29 @@
     class="message-button"
     mat-mini-fab
     [matMenuTriggerFor]="email">
-    <mat-icon
-      [matBadge]="messages.length"
-      matBadgeColor="accent"
-      class="message-button__icon"
+    <mat-icon [matBadge]="messages.length" matBadgeColor="accent" class="message-button__icon"
       >mail_outline</mat-icon
     >
   </button>
   <ng-template #emptyMessage>
     <button class="message-button" mat-mini-fab [matMenuTriggerFor]="none">
-      <mat-icon matBadgeColor="accent" class="message-button__icon"
-        >mail_outline</mat-icon
-      >
+      <mat-icon matBadgeColor="accent" class="message-button__icon">mail_outline</mat-icon>
     </button>
   </ng-template>
   <mat-menu #email="matMenu" xPosition="before">
     <div *ngIf="messages.length > 1" class="message-menu-header">
       <h4 class="message-menu-header__title">Mensagens</h4>
-      <p class="message-menu-header__subtitle">
-        {{ messages.length }} Novas Mensagens
-      </p>
+      <p class="message-menu-header__subtitle">{{ messages.length }} Novas Mensagens</p>
     </div>
 
     <div *ngIf="messages.length === 1" class="message-menu-header">
       <h4 class="message-menu-header__title">Mensagem</h4>
-      <p class="message-menu-header__subtitle">
-        {{ messages.length }} Nova Mensagem
-      </p>
+      <p class="message-menu-header__subtitle">{{ messages.length }} Nova Mensagem</p>
     </div>
 
-    <div
-      *ngFor="let message of messages; let i = index"
-      class="message-wrapper">
+    <div *ngFor="let message of messages; let i = index" class="message-wrapper">
       <div class="message-wrapper__icon-wrapper">
-        <button
-          class="message-wrapper__icon"
-          [ngClass]="message.color"
-          mat-mini-fab>
+        <button class="message-wrapper__icon" [ngClass]="message.color" mat-mini-fab>
           {{ message.name | shortName }}
         </button>
         <span class="message-wrapper__time">{{ message.time }}</span>

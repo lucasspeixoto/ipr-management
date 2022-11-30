@@ -15,20 +15,34 @@ import { forgotPasswordForm } from '@constants/auth-forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordComponent {
-  public hide = true;
-
-  public forgotPasswordForm = this._formBuilder.group({
+  /**
+   * @name loginForm
+   * @description
+   * forgotPasswordForm instance form create loginForm form
+   * with email
+   * @access public
+   *
+   */
+  public readonly forgotPasswordForm = this._formBuilder.group({
     ...forgotPasswordForm,
   });
-
-  public readonly year = new Date().getFullYear();
 
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _store: Store<fromApp.AppState>
   ) {}
 
-  public handleForgotPassword(): void {
+  /**
+   * @name forgotPasswordHandler
+   * @description
+   * User forgot Password handler for get user data (email)
+   * from form and and dispatch the ForgotPassword action with user payload
+   * @params None
+   * @access public
+   * @return void
+   *
+   */
+  public forgotPasswordHandler(): void {
     const { email } = this.forgotPasswordForm.value;
     this._store.dispatch(ForgotPassword({ payload: email! }));
   }

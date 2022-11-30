@@ -24,6 +24,7 @@ import * as auth from 'firebase/auth';
 
 import { AuthActions } from './action-types';
 import { appRoutes } from '@app/config/routes/app-routes';
+import { FirebaseAuthUserCredential } from '../models/firebase-users.model';
 
 @Injectable()
 export class AuthEffects {
@@ -36,7 +37,7 @@ export class AuthEffects {
           const { email, password } = action.payload;
           await this._angularFireAuth
             .signInWithEmailAndPassword(email, password)
-            .then(result => {
+            .then((result: FirebaseAuthUserCredential) => {
               const user = result.user;
               if (user) {
                 const loggedUser: User = {
@@ -47,9 +48,7 @@ export class AuthEffects {
                   email: user.email!,
                 };
 
-                this._store.dispatch(
-                  AuthActions.SetUserData({ payload: loggedUser })
-                );
+                this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
                 this._router.navigateByUrl(appRoutes.HOME);
                 this._store.dispatch(StopLoading());
                 this._snackBarService.openSuccessSnackBar(
@@ -75,12 +74,11 @@ export class AuthEffects {
           const provider = new auth.GoogleAuthProvider();
           await this._angularFireAuth
             .signInWithPopup(provider)
-            .then(result => {
+            .then((result: FirebaseAuthUserCredential) => {
               const isNewUser = result.additionalUserInfo?.isNewUser;
               const user = result.user;
               if (user) {
-                const { uid, photoURL, emailVerified, email, displayName } =
-                  user;
+                const { uid, photoURL, emailVerified, email, displayName } = user;
 
                 if (isNewUser) {
                   const newUser: User = {
@@ -92,9 +90,7 @@ export class AuthEffects {
                     email,
                   };
 
-                  this._store.dispatch(
-                    AuthActions.SetNewUserData({ payload: newUser })
-                  );
+                  this._store.dispatch(AuthActions.SetNewUserData({ payload: newUser }));
                   this._store.dispatch(AuthActions.SendEmailVerification());
                 } else {
                   const loggedUser: User = {
@@ -104,9 +100,7 @@ export class AuthEffects {
                     emailVerified: user.emailVerified,
                     email: user.email!,
                   };
-                  this._store.dispatch(
-                    AuthActions.SetUserData({ payload: loggedUser })
-                  );
+                  this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
                 }
 
                 this._router.navigateByUrl(appRoutes.HOME);
@@ -134,7 +128,7 @@ export class AuthEffects {
           const { name, email, password } = action.payload;
           this._angularFireAuth
             .createUserWithEmailAndPassword(email, password)
-            .then(result => {
+            .then((result: FirebaseAuthUserCredential) => {
               const user = result.user;
               if (user) {
                 const { uid, photoURL, emailVerified, email } = user;
@@ -147,9 +141,7 @@ export class AuthEffects {
                   email,
                 };
 
-                this._store.dispatch(
-                  AuthActions.SetNewUserData({ payload: newUser })
-                );
+                this._store.dispatch(AuthActions.SetNewUserData({ payload: newUser }));
                 this._store.dispatch(AuthActions.SendEmailVerification());
               }
             })
@@ -170,11 +162,9 @@ export class AuthEffects {
           this._angularFireAuth.currentUser
             .then(user => user!.sendEmailVerification())
             .then(() => {
-              this._router.navigateByUrl('/tasks');
+              this._router.navigateByUrl(appRoutes.HOME);
               this._store.dispatch(StopLoading());
-              this._snackBarService.openSuccessSnackBar(
-                'Bem vindo ao Plataforma IPR 😁'
-              );
+              this._snackBarService.openSuccessSnackBar('Bem vindo ao Plataforma IPR 😁');
             });
         })
       ),
@@ -189,9 +179,7 @@ export class AuthEffects {
           const profile = {
             displayName: action.payload.name,
           };
-          return (await this._angularFireAuth.currentUser)!.updateProfile(
-            profile
-          );
+          return (await this._angularFireAuth.currentUser)!.updateProfile(profile);
         })
       ),
     { dispatch: false }
@@ -272,17 +260,13 @@ export class AuthEffects {
                 emailVerified,
               } as User;
 
-              this._store.dispatch(
-                AuthActions.SetUserData({ payload: loggedUser })
-              );
+              this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
               //this._store.dispatch(loadBills({ payload: uid }));
               //this._store.dispatch(loadTasks({ payload: uid }));
             }
 
             const isLogged = user !== null ? true : false;
-            this._store.dispatch(
-              AuthActions.UpdateIsLoggedStatus({ payload: isLogged })
-            );
+            this._store.dispatch(AuthActions.UpdateIsLoggedStatus({ payload: isLogged }));
           });
         })
       ),
@@ -291,10 +275,10 @@ export class AuthEffects {
 
   constructor(
     private readonly _actions$: Actions,
-    public readonly _angularFirestore: AngularFirestore,
-    public readonly _angularFireAuth: AngularFireAuth,
-    public readonly _router: Router,
-    public readonly _authService: AuthenticationService,
+    private readonly _angularFirestore: AngularFirestore,
+    private readonly _angularFireAuth: AngularFireAuth,
+    private readonly _router: Router,
+    private readonly _authService: AuthenticationService,
     private readonly _store: Store<fromApp.AppState>,
     private readonly _snackBarService: SnackbarService
   ) {}

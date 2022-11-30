@@ -1,16 +1,11 @@
 <button class="notification-button" mat-mini-fab [matMenuTriggerFor]="bell">
-  <mat-icon
-    [matBadge]="2"
-    matBadgeColor="warn"
-    class="notification-button__icon">
+  <mat-icon [matBadge]="2" matBadgeColor="warn" class="notification-button__icon">
     notifications_none
   </mat-icon>
 </button>
 <ng-template #emptyNotification>
   <button class="notification-button" mat-mini-fab [matMenuTriggerFor]="none">
-    <mat-icon matBadgeColor="warn" class="notification-button__icon">
-      notifications_none
-    </mat-icon>
+    <mat-icon matBadgeColor="warn" class="notification-button__icon"> notifications_none </mat-icon>
   </button>
 </ng-template>
 
@@ -55,9 +50,7 @@
 <mat-menu #none="matMenu" xPosition="before" class="notification-menu">
   <ng-container>
     <button mat-menu-item class="notification-menu__button">
-      <mat-icon class="notification-menu__icon_blue"
-        >notifications_none</mat-icon
-      >
+      <mat-icon class="notification-menu__icon_blue">notifications_none</mat-icon>
       Nenhuma Notificação
     </button>
   </ng-container>

@@ -3,7 +3,7 @@
     class="form"
     id="form"
     [formGroup]="signupForm"
-    (submit)="handleSignup()">
+    (submit)="userSignUpHandler()">
     <mat-form-field class="form__input form__input--name" appearance="fill">
       <mat-label>Nome</mat-label>
       <input matInput type="text" formControlName="name" required />
@@ -26,7 +26,7 @@
       <mat-label>Digite Sua Senha</mat-label>
       <input
         matInput
-        [type]="hide ? 'password' : 'text'"
+        [type]="hidePassword ? 'password' : 'text'"
         formControlName="password"
         required
         minlength="6" />
@@ -34,10 +34,12 @@
         mat-icon-button
         matSuffix
         type="button"
-        (click)="hide = !hide"
+        (click)="hidePassword = !hidePassword"
         [attr.aria-label]="'Ocultar Senha'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{
+          hidePassword ? 'visibility_off' : 'visibility'
+        }}</mat-icon>
       </button>
       <mat-error
         ><app-custom-validation-message

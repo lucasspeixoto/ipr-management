@@ -15,9 +15,25 @@ import { AuthActions } from '@app/authentication/store/action-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  public hide = true;
+  /**
+   * @name hidePassword
+   * @description
+   * Variable for control the user password
+   * visibility, show if false and hide with true
+   * @access public
+   *
+   */
+  public hidePassword = true;
 
-  public loginForm = this._formBuilder.group({ ...loginForm });
+  /**
+   * @name loginForm
+   * @description
+   * FormBuilder instance form create loginForm form
+   * with email and password
+   * @access public
+   *
+   */
+  public readonly loginForm = this._formBuilder.group({ ...loginForm });
 
   constructor(
     private readonly _formBuilder: FormBuilder,

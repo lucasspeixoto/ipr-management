@@ -48,9 +48,19 @@
           }
         ],
         "no-unused-vars": "off",
+        "max-len": ["warn", { "code": 90 }],
         "prettier/prettier": [
           "error",
           {
+            "tabWidth": 2,
+            "useTabs": false,
+            "singleQuote": true,
+            "semi": true,
+            "bracketSpacing": true,
+            "arrowParens": "avoid",
+            "trailingComma": "es5",
+            "bracketSameLine": true,
+            "printWidth": 90,
             "endOfLine": "auto"
           }
         ],
@@ -82,10 +92,7 @@
       "excludedFiles": ["*inline-template-*.component.html"],
       "extends": ["plugin:prettier/recommended"],
       "rules": {
-        "prettier/prettier": [
-          "error",
-          { "parser": "angular", "endOfLine": "auto" }
-        ]
+        "prettier/prettier": ["error", { "parser": "angular", "endOfLine": "auto" }]
       }
     }
   ]

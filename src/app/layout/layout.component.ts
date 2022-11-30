@@ -43,18 +43,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this._store.dispatch(LoadUser());
 
     this.mobileQuery = this.media.matchMedia('(max-width: 1024px)');
-    this.mobileQueryListener = (): void =>
-      this.changeDetectorRef.detectChanges();
+    this.mobileQueryListener = (): void => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener(this.eventType, this.mobileQueryListener);
 
     this.isShowSidebar = !this.mobileQuery.matches;
   }
 
   public ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener(
-      this.eventType,
-      this.mobileQueryListener
-    );
+    this.mobileQuery.removeEventListener(this.eventType, this.mobileQueryListener);
 
     this.sidenav.close();
   }

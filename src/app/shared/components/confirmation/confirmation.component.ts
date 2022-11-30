@@ -26,9 +26,7 @@ export class ConfirmationComponent {
   @Output()
   public confirmClicked = new EventEmitter<boolean>();
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public readonly data: ConfirmationData
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public readonly data: ConfirmationData) {}
 
   public confirm(): void {
     this.confirmClicked.emit(true);

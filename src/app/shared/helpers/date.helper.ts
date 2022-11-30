@@ -31,11 +31,7 @@ export const getDateFromString = (date: string | Date): number => {
   const dateAsString = date as string;
   const [day, month, year] = dateAsString.split('/');
 
-  const dayWithoutHours = new Date(
-    Number(year),
-    Number(month) - 1,
-    Number(day)
-  );
+  const dayWithoutHours = new Date(Number(year), Number(month) - 1, Number(day));
   return dayWithoutHours.setHours(0, 0, 0, 0);
 };
 

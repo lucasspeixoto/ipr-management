@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
@@ -20,8 +15,7 @@ import { menuItems } from '@constants/menu-routes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {
-  @Output() public readonly signOut: EventEmitter<void> =
-    new EventEmitter<void>();
+  @Output() public readonly signOut: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly menuItems = menuItems;
 

@@ -1,8 +1,5 @@
 <ng-container class="container" *ngIf="user$ | async">
-  <app-header
-    (isShowSidebar)="toggleMenu($event)"
-    [isMenuOpened]="isShowSidebar">
-  </app-header>
+  <app-header (isShowSidebar)="toggleMenu($event)" [isMenuOpened]="isShowSidebar"> </app-header>
   <mat-sidenav-container class="layout">
     <mat-sidenav
       #sidenav
