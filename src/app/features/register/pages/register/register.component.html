@@ -1,22 +1,51 @@
 <app-layout>
   <mat-stepper #stepper class="register">
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Envio não realizado!">
-      <form [formGroup]="firstFormGroup" class="register__form">
+    <mat-step [stepControl]="personalForm" errorMessage="Envio não realizado!">
+      <form [formGroup]="personalForm" class="register__form">
         <ng-template matStepLabel>Dados Pessoais</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input
-            matInput
-            placeholder="Last name, First name"
-            formControlName="firstCtrl"
-            required />
-        </mat-form-field>
+
+        <mat-grid-list cols="4">
+          <mat-form-field
+            class="container__form-input"
+            color="accent"
+            appearance="fill">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Nome"
+              formControlName="name"
+              required />
+          </mat-form-field>
+        </mat-grid-list>
+
+        <mat-grid-list cols="4">
+          <mat-form-field
+            class="container__form-input"
+            color="accent"
+            appearance="fill">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="type">
+              <mat-option
+                *ngFor="let type of sexOptions"
+                [value]="type.value"
+                >{{ type.viewValue }}</mat-option
+              >
+            </mat-select>
+            <mat-error
+              ><app-custom-validation-message
+                controlName="type"></app-custom-validation-message>
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-list>
+
         <div>
           <button mat-button matStepperNext>Próximo</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" errorMessage="Envio não realizado!">
+    <mat-step
+      [stepControl]="secondFormGroup"
+      errorMessage="Envio não realizado!">
       <form [formGroup]="secondFormGroup" class="register__form">
         <ng-template matStepLabel>Dados Complementares</ng-template>
         <mat-form-field appearance="fill">

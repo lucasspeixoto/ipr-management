@@ -19,6 +19,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MODULES = [
   MatButtonModule,
@@ -39,6 +40,7 @@ const MODULES = [
   MatRadioModule,
   DragDropModule,
   MatStepperModule,
+  MatGridListModule,
 ];
 
 const DATE_PROVIDERS = [MatDatepickerModule, MatNativeDateModule];
