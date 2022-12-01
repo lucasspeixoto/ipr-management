@@ -16,32 +16,32 @@ import { AuthActions } from '@authSt/action-types';
 })
 export class SignupComponent {
   /**
-   * @name hidePassword
+   * @access public
    * @description
    * Variable for control the user password
    * visibility, show if false and hide with true
-   * @access public
+   * @property {boolean} hidePassword
    *
    */
   public hidePassword = true;
 
   /**
-   * @name title:
+   * @access public
    * @description
    * Variable with the page title string passed
    * as input in the app-authentication-layout
    * component
-   * @access public
+   * @property {string} title
    *
    */
   public readonly title = 'Cadastro';
 
   /**
-   * @name signupForm
+   * @access public
    * @description
    * FormBuilder instance form create signup form
    * with name, email and password
-   * @access public
+   * @property {FormGroup} signupForm
    *
    */
   public readonly signupForm = this._formBuilder.group({ ...signUpForm });
@@ -52,12 +52,11 @@ export class SignupComponent {
   ) {}
 
   /**
-   * @name userSignUpHandler
+   * @access public
    * @description
    * User signup handler for get user data (name, email and password)
    * from form and and dispatch the Signup action with user payload
-   * @params None
-   * @access public
+   * @method userSignUpHandler
    * @return void
    *
    */
@@ -74,12 +73,11 @@ export class SignupComponent {
   }
 
   /**
-   * @name loginWithGoogleHandler
+   * @access public
    * @description
    * User login with google handler for dispatch
    * the LoginWithGoogle action
-   * @params None
-   * @access public
+   * @method loginWithGoogleHandler
    * @return void
    *
    */
