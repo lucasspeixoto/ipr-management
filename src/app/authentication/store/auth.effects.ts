@@ -24,7 +24,7 @@ import * as auth from 'firebase/auth';
 
 import { AuthActions } from './action-types';
 import { appRoutes } from '@app/config/routes/app-routes';
-import { FirebaseAuthUserCredential } from '../models/firebase-users.model';
+import { FirebaseAuthUserCredential } from '@authMd/firebase-auth-user-credential.model';
 
 @Injectable()
 export class AuthEffects {

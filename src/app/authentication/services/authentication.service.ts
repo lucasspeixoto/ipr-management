@@ -1,23 +1,23 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { FirebaseUser } from '../models/firebase-user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(
-    public readonly afs: AngularFirestore,
-    public readonly _angularFireAuth: AngularFireAuth,
-    public readonly router: Router,
-    public readonly ngZone: NgZone
-  ) {}
+  constructor(public readonly _angularFireAuth: AngularFireAuth) {}
 
-  public isAuth(): Observable<boolean> {
-    return this._angularFireAuth.authState.pipe(map(user => user != null));
+  /**
+   * @access public
+   * @description Check in the firebase authState if the user
+   * is logged or not, returning a observable of boolean
+   * @method isAuth
+   * @returns {Observable<boolean>}
+   */
+  public isAuth(): Observable<FirebaseUser> {
+    return this._angularFireAuth.authState;
   }
 }

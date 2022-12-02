@@ -10,7 +10,7 @@ import {
   UrlSegment,
   UrlTree,
 } from '@angular/router';
-import { first, tap } from 'rxjs/operators';
+import { first, map, tap } from 'rxjs/operators';
 
 import { AuthenticationService } from '../services/authentication.service';
 import { Injectable } from '@angular/core';
@@ -29,6 +29,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.isAuth().pipe(
+      map(user => user != null),
       tap(user => {
         if (!user) {
           this.router.navigateByUrl('/');
@@ -42,6 +43,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     segments: UrlSegment[]
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.isAuth().pipe(
+      map(user => user != null),
       tap(user => {
         if (!user) {
           this.router.navigateByUrl('/');
