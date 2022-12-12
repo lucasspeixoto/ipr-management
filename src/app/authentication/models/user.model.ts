@@ -3,6 +3,6 @@ export interface User {
   email: string | null;
   name: string;
   photoURL: string | null;
-  emailVerified: boolean;
-  admin?: boolean;
+  emailVerified?: boolean;
+  admin: boolean;
 }

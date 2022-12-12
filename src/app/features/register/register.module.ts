@@ -8,6 +8,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@sharedM/shared.module';
 import { RegisterComponent } from './pages/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
+import { GetAddressService } from '@app/shared/services/get-address/get-address.service';
+import { RegisterService } from './services/register.service';
+import { RegisterEffects } from '@registerSt/register/register.effects';
 
 const routes = [{ path: '', component: RegisterComponent }];
 
@@ -17,10 +21,11 @@ const routes = [{ path: '', component: RegisterComponent }];
     MaterialModule,
     SharedModule,
     LayoutModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([]),
+    EffectsModule.forFeature([RegisterEffects]),
   ],
   declarations: [RegisterComponent],
-  providers: [],
+  providers: [GetAddressService, RegisterService],
 })
 export class RegisterModule {}

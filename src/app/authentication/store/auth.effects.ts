@@ -23,8 +23,9 @@ import { SnackbarService } from '@sharedS/snackbar/snackbar.service';
 import * as auth from 'firebase/auth';
 
 import { AuthActions } from './action-types';
-import { appRoutes } from '@app/config/routes/app-routes';
+import { appRoutes } from '@config/routes/app-routes';
 import { FirebaseAuthUserCredential } from '@authMd/firebase-auth-user-credential.model';
+import { loadMemberData } from '@registerSt/register/register.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -40,7 +41,7 @@ export class AuthEffects {
             .then((result: FirebaseAuthUserCredential) => {
               const user = result.user;
               if (user) {
-                const loggedUser: User = {
+                const loggedUser: Partial<User> = {
                   name: user.displayName!,
                   userId: user.uid,
                   photoURL: user.photoURL!,
@@ -93,7 +94,7 @@ export class AuthEffects {
                   this._store.dispatch(AuthActions.SetNewUserData({ payload: newUser }));
                   this._store.dispatch(AuthActions.SendEmailVerification());
                 } else {
-                  const loggedUser: User = {
+                  const loggedUser: Partial<User> = {
                     name: user.displayName!,
                     userId: user.uid,
                     photoURL: user.photoURL!,
@@ -192,12 +193,12 @@ export class AuthEffects {
         tap(async action => {
           const newUser = action.payload;
 
-          const userRef: AngularFirestoreDocument<{ user: User }> =
+          const userRef: AngularFirestoreDocument<{ auth: Partial<User> }> =
             this._angularFirestore.doc(`users_testing/${newUser.userId}`);
           this._store.dispatch(AuthActions.UpdateProfile({ payload: newUser }));
           this._store.dispatch(AuthActions.SetUserData({ payload: newUser }));
 
-          return userRef.set({ user: newUser }, { merge: true });
+          return userRef.set({ auth: newUser }, { merge: true });
         })
       ),
     { dispatch: false }
@@ -259,9 +260,8 @@ export class AuthEffects {
                 name: displayName!,
                 emailVerified,
               } as User;
-
               this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
-              //this._store.dispatch(loadBills({ payload: uid }));
+              this._store.dispatch(loadMemberData({ payload: uid }));
               //this._store.dispatch(loadTasks({ payload: uid }));
             }
 

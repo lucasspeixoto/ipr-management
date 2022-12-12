@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -19,6 +20,7 @@ import { UserComponent } from '@layout/header/user/user.component';
 import { MaterialModule } from '@sharedM/material.module';
 import { MessageEffects } from '@sharedSt/message/message.effects';
 import { SharedModule } from '@sharedM/shared.module';
+import { RegisterEffects } from '@registerSt/register/register.effects';
 
 const MODULES = [
   CommonModule,
@@ -39,7 +41,7 @@ const COMPONENTS = [
   FooterComponent,
 ];
 
-const EFFECTS = [AuthEffects, MessageEffects];
+const EFFECTS = [AuthEffects, RegisterEffects, MessageEffects];
 
 @NgModule({
   declarations: [...COMPONENTS],

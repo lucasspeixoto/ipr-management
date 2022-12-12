@@ -4,7 +4,7 @@ import { Logout, SetUserData, Signup, UpdateIsLoggedStatus } from './auth.action
 import { User } from '@authMd/user.model';
 
 export interface AuthState {
-  user: User | undefined;
+  user: Partial<User> | undefined;
   isLogged: boolean;
 }
 

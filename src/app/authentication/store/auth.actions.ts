@@ -29,12 +29,12 @@ export const SendEmailVerification = createAction(Actions.EMAIL_VERIFICATION);
 
 export const UpdateProfile = createAction(
   Actions.UPDATE_PROFILE,
-  props<{ payload: User }>()
+  props<{ payload: Partial<User> }>()
 );
 
 export const SetNewUserData = createAction(
   Actions.SET_NEW_USER_DATA,
-  props<{ payload: User }>()
+  props<{ payload: Partial<User> }>()
 );
 
 export const UpdateIsLoggedStatus = createAction(
@@ -44,7 +44,7 @@ export const UpdateIsLoggedStatus = createAction(
 
 export const SetUserData = createAction(
   Actions.SET_USER_DATA,
-  props<{ payload: User }>()
+  props<{ payload: Partial<User> }>()
 );
 
 export const Logout = createAction(Actions.LOGOUT);

@@ -39,6 +39,14 @@
 
       "@features/*": ["src/app/features/*"],
 
+      "@registerC/*": ["src/app/features/register/components/*"],
+      "@registerP/*": ["src/app/features/register/pages/*"],
+      "@registerMd/*": ["src/app/features/register/models/*"],
+      "@registerS/*": ["src/app/features/register/services/*"],
+      "@registerSt/*": ["src/app/features/register/store/*"],
+      "@registerH/*": ["src/app/features/register/helpers/*"],
+
+
       "@billsC/*": ["src/app/features/bills/components/*"],
       "@billsP/*": ["src/app/features/bills/pages/*"],
       "@billsMd/*": ["src/app/features/bills/models/*"],
@@ -60,12 +68,7 @@
       "@tasksSt/*": ["src/app/features/tasks/store/*"],
       "@tasksH/*": ["src/app/features/tasks/helpers/*"],
 
-      "@reportsC/*": ["src/app/features/reports/components/*"],
-      "@reportsP/*": ["src/app/features/reports/pages/*"],
-      "@reportsMd/*": ["src/app/features/reports/models/*"],
-      "@reportsS/*": ["src/app/features/reports/services/*"],
-      "@reportsSt/*": ["src/app/features/reports/store/*"],
-      "@reportsH/*": ["src/app/features/reports/helpers/*"],
+
 
       "@profileC/*": ["src/app/features/profile/components/*"],
       "@profileP/*": ["src/app/features/profile/pages/*"],

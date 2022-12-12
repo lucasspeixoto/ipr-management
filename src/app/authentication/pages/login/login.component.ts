@@ -41,7 +41,7 @@ export class LoginComponent {
   ) {}
 
   /**
-   * @name userLoginHandler
+   * @method userLoginHandler
    * @description
    * User login handler for get user data (email and password)
    * from form and and dispatch the Login action with user payload
@@ -62,7 +62,7 @@ export class LoginComponent {
   }
 
   /**
-   * @name loginWithGoogleHandler
+   * @method loginWithGoogleHandler
    * @description
    * User login with google handler for dispatch
    * the LoginWithGoogle action
