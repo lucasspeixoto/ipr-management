@@ -17,6 +17,7 @@ export enum registerActions {
 
   SET_ECCLESIASTICAL = '[Ecclesiastical] Set Ecclesiastical Data',
   REMOVE_ECCLESIASTICAL = '[Ecclesiastical] Remove Ecclesiastical Data',
+  UPDATE_ECCLESIASTICAL_DATA = '[Ecclesiastical] Update Ecclesiastical Data',
 
   SET_PROCESS = '[Process] Set Process',
   SET_HAS_PERSONAL = '[Process] Set Has Personal',
@@ -58,6 +59,10 @@ export const removeSupplementary = createAction(registerActions.REMOVE_SUPPLEMEN
 export const setEcclesiastical = createAction(
   registerActions.SET_ECCLESIASTICAL,
   props<{ payload: Ecclesiastical }>()
+);
+export const updateEcclesiastical = createAction(
+  registerActions.UPDATE_ECCLESIASTICAL_DATA,
+  props<{ payload: Partial<Ecclesiastical>; userId?: string | null }>()
 );
 export const removeEcclesiastical = createAction(registerActions.REMOVE_ECCLESIASTICAL);
 

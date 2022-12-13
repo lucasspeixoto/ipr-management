@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 import {
+  baptismOptions,
+  communitiesOption,
   craftOptions,
+  interestsOption,
   maritalOptions,
   membershipOptions,
   schoolingOptions,
@@ -21,8 +24,13 @@ import * as fromApp from '@app/app.state';
 import { getUserUid } from '@authSt/auth.selectors';
 
 import { Personal } from '@registerMd/personal';
-import { getPersonal, getSupplementary } from '@registerSt/register/register.selectors';
 import {
+  getEcclesiastical,
+  getPersonal,
+  getSupplementary,
+} from '@registerSt/register/register.selectors';
+import {
+  updateEcclesiastical,
   updatePersonal,
   updateSupplementary,
 } from '@registerSt/register/register.actions';
@@ -36,6 +44,7 @@ import {
   supplementaryValidators,
 } from '../../helpers/validators';
 import { Supplementary } from '../../models/supplementary';
+import { Ecclesiastical } from '../../models/ecclesiastical';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -94,6 +103,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     takeUntil(this.destroy$),
     tap(supplementary => {
       this.supplementaryDataHandler(supplementary);
+    })
+  );
+
+  public ecclesiasticalData!: Ecclesiastical;
+  public ecclesiasticalData$ = this._store.select(getEcclesiastical).pipe(
+    takeUntil(this.destroy$),
+    tap(ecclesiastical => {
+      this.ecclesiasticalDataHandler(ecclesiastical);
     })
   );
 
@@ -169,13 +186,40 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public readonly membershipOptions = membershipOptions;
 
   /**
+   * @name communitiesOption
+   * @description
+   * Array with the member ship form options
+   * @access public
+   *
+   */
+  public readonly communitiesOption = communitiesOption;
+
+  /**
    * @name craftOptions
    * @description
-   * Array with the cragt form options
+   * Array with the craft form options
    * @access public
    *
    */
   public readonly craftOptions = craftOptions;
+
+  /**
+   * @name interestsOption
+   * @description
+   * Array with the nterests form options
+   * @access public
+   *
+   */
+  public readonly interestsOption = interestsOption;
+
+  /**
+   * @name baptismOptions
+   * @description
+   * Array with the nterests form options
+   * @access public
+   *
+   */
+  public readonly baptismOptions = baptismOptions;
 
   constructor(
     private readonly _formBuilder: NonNullableFormBuilder,
@@ -254,6 +298,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * @method supplementaryDataHandler
+   * @description Method for get the personal data
+   * from store, if exists and update the personalForm
+   * @param {Personal | undefined} supplementary
+   * @access public
+   * @return void
+   *
+   */
+  public ecclesiasticalDataHandler(ecclesiastical: Ecclesiastical | undefined): void {
+    if (ecclesiastical) {
+      this.ecclesiasticalData = ecclesiastical;
+      const baptism_date = new Date(getDateFromString(ecclesiastical.baptism_date));
+      this.ecclesiasticalForm.setValue({
+        ...this.ecclesiasticalData,
+        baptism_date,
+      });
+    }
+  }
+
   public sendPersonalDataHandler(): void {
     const personalData = this.personalForm.value as Partial<Personal>;
     const { birth_date } = personalData;
@@ -282,6 +346,23 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this._store.dispatch(
         updateSupplementary({
           payload: newSupplementaryData,
+          userId: this.userId,
+        })
+      );
+    }
+  }
+
+  public sendEcclesiasticalDataHandler(): void {
+    const ecclesiasticalData = this.ecclesiasticalForm.value as Partial<Ecclesiastical>;
+    const { baptism_date } = ecclesiasticalData;
+    const newEcclesiasticalData: Partial<Ecclesiastical> = {
+      ...ecclesiasticalData,
+      baptism_date: this._dateService.formatDate(new Date(baptism_date!)),
+    };
+    if (this.ecclesiasticalForm.valid) {
+      this._store.dispatch(
+        updateEcclesiastical({
+          payload: newEcclesiasticalData,
           userId: this.userId,
         })
       );

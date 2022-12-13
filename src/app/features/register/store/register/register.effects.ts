@@ -21,6 +21,7 @@ import { Messages } from '@shared/messages/firebase';
 
 import { Personal } from '@registerMd/personal';
 import { Supplementary } from '../../models/supplementary';
+import { Ecclesiastical } from '../../models/ecclesiastical';
 
 @Injectable()
 export class RegisterEffects {
@@ -33,28 +34,38 @@ export class RegisterEffects {
           const userId = action.payload;
           const url = `users/${userId}`;
           this._angularFirestore
-            .doc(url)
+            .doc<Member>(url)
             .valueChanges()
             .subscribe({
               next: memberData => {
-                const data = memberData as Member;
-                this._store.dispatch(
-                  fromRegister.setPersonal({
-                    payload: data.personal,
-                    userId,
-                  })
-                );
-                this._store.dispatch(
-                  fromRegister.setEcclesiastical({ payload: data.ecclesiastical })
-                );
-                this._store.dispatch(
-                  fromRegister.setSupplementary({ payload: data.supplementary })
-                );
-                this._store.dispatch(fromRegister.setProcess({ payload: data.process }));
+                if (memberData) {
+                  const {
+                    personal,
+                    supplementary,
+                    ecclesiastical,
+                    process,
+                    observation,
+                  } = memberData!;
 
-                this._store.dispatch(
-                  fromRegister.setObservation({ payload: data.observation })
-                );
+                  this._store.dispatch(
+                    fromRegister.setPersonal({
+                      payload: personal,
+                      userId,
+                    })
+                  );
+                  this._store.dispatch(
+                    fromRegister.setSupplementary({ payload: supplementary })
+                  );
+                  this._store.dispatch(
+                    fromRegister.setEcclesiastical({ payload: ecclesiastical })
+                  );
+
+                  this._store.dispatch(fromRegister.setProcess({ payload: process }));
+
+                  this._store.dispatch(
+                    fromRegister.setObservation({ payload: observation })
+                  );
+                }
 
                 this._store.dispatch(StopLoading());
               },
@@ -96,6 +107,23 @@ export class RegisterEffects {
           }> = this._angularFirestore.doc(`users/${userId}`);
 
           return userRef.set({ supplementary: newUser }, { merge: true });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  public updateEcclesiastical$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromRegister.updateEcclesiastical),
+        tap(async action => {
+          const newUser = action.payload;
+          const userId = action.userId;
+          const userRef: AngularFirestoreDocument<{
+            ecclesiastical: Partial<Ecclesiastical>;
+          }> = this._angularFirestore.doc(`users/${userId}`);
+
+          return userRef.set({ ecclesiastical: newUser }, { merge: true });
         })
       ),
     { dispatch: false }

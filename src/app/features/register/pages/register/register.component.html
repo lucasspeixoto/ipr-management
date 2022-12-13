@@ -2,6 +2,7 @@
   <ng-container *ngIf="userId$ | async"></ng-container>
   <ng-container *ngIf="personalData$ | async"></ng-container>
   <ng-container *ngIf="supplementaryData$ | async"></ng-container>
+  <ng-container *ngIf="ecclesiasticalData$ | async"></ng-container>
 
   <mat-stepper #stepper class="register">
     <!-- * --------------- Dados Pessoais --------------- -->
@@ -329,7 +330,7 @@
               membership.viewValue
             }}</mat-option>
           </mat-select>
-          <mat-icon matSuffix>people_outline</mat-icon>
+          <mat-icon matSuffix>card_membership</mat-icon>
           <mat-error
             ><app-custom-validation-message
               controlName="membership"></app-custom-validation-message>
@@ -337,15 +338,81 @@
         </mat-form-field>
 
         <mat-form-field class="container__form-input" color="accent" appearance="fill">
-          <mat-label for="craft">Membresia</mat-label>
+          <mat-label for="craft">Ofício</mat-label>
           <mat-select formControlName="craft">
             <mat-option *ngFor="let craft of craftOptions" [value]="craft.value">{{
               craft.viewValue
             }}</mat-option>
           </mat-select>
-          <mat-icon matSuffix>people_outline</mat-icon>
+          <mat-icon matSuffix>work</mat-icon>
           <mat-error
             ><app-custom-validation-message controlName="craft"></app-custom-validation-message>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="container__form-input" color="accent" appearance="fill">
+          <mat-label for="communities">Igrejas que frequentou</mat-label>
+          <mat-select formControlName="communities" multiple>
+            <mat-option *ngFor="let community of communitiesOption" [value]="community.value">{{
+              community.viewValue
+            }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>home</mat-icon>
+          <mat-error
+            ><app-custom-validation-message
+              controlName="communities"></app-custom-validation-message>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="container__form-input" color="accent" appearance="fill">
+          <mat-label for="baptism">Batismo</mat-label>
+          <mat-select formControlName="baptism">
+            <mat-option *ngFor="let baptism of baptismOptions" [value]="baptism.value">{{
+              baptism.viewValue
+            }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>home</mat-icon>
+          <mat-error
+            ><app-custom-validation-message controlName="baptism"></app-custom-validation-message>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="container__form-input" color="accent" appearance="fill">
+          <mat-label for="interests">Interesses</mat-label>
+          <mat-select formControlName="interests" multiple>
+            <mat-option *ngFor="let interest of interestsOption" [value]="interest.value">{{
+              interest.viewValue
+            }}</mat-option>
+          </mat-select>
+          <mat-icon matSuffix>library_books</mat-icon>
+          <mat-error
+            ><app-custom-validation-message controlName="interests"></app-custom-validation-message>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="container__form-input" color="accent" appearance="fill">
+          <mat-label for="baptism_date">Data de Batismo</mat-label>
+          <input matInput [matDatepicker]="baptism_date_picker" formControlName="baptism_date" />
+
+          <mat-datepicker-toggle matSuffix [for]="baptism_date_picker"></mat-datepicker-toggle>
+          <mat-datepicker #baptism_date_picker color="primary"></mat-datepicker>
+          <mat-error
+            ><app-custom-validation-message
+              controlName="baptism_date"></app-custom-validation-message>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="container__form-input" color="accent" appearance="fill">
+          <mat-label for="baptism_shepherd">Pastor de Batismo</mat-label>
+          <input
+            matInput
+            placeholder="Pastor de Batismo"
+            formControlName="baptism_shepherd"
+            required />
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error
+            ><app-custom-validation-message
+              controlName="baptism_shepherd"></app-custom-validation-message>
           </mat-error>
         </mat-form-field>
       </form>
@@ -367,11 +434,13 @@
           matStepperNext
           color="primary"
           type="button"
-          [disabled]="supplementaryForm.invalid"
-          (click)="sendSupplementaryDataHandler()">
+          [disabled]="ecclesiasticalForm.invalid"
+          (click)="sendEcclesiasticalDataHandler()">
           Salvar
         </button>
       </div>
+
+      {{ ecclesiasticalForm.value | json }}
     </mat-step>
   </mat-stepper>
 </app-layout>

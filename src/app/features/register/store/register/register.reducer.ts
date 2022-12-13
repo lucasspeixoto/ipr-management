@@ -15,6 +15,7 @@ import {
   setObservation,
   setPersonal,
   setSupplementary,
+  updateEcclesiastical,
   updatePersonal,
   updateSupplementary,
 } from './register.actions';
@@ -60,6 +61,11 @@ const _registerReducer = createReducer(
   }),
 
   on(setEcclesiastical, (_state, { payload }) => {
+    return Object.assign({}, _state, {
+      ecclesiastical: payload,
+    });
+  }),
+  on(updateEcclesiastical, (_state, { payload }) => {
     return Object.assign({}, _state, {
       ecclesiastical: payload,
     });
