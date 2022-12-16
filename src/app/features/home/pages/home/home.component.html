@@ -1,14 +1,21 @@
 <app-layout>
-  <div class="home__empty">
-    <img src="assets/images/no-data.svg" width="50%" height="50%" />
-    <h3>Bem vindo a igreja pentecostal reformada. Continue para finalizar o seu cadastro!</h3>
-    <button
-      class="app-button"
-      mat-raised-button
-      color="warn"
-      type="button"
-      routerLink="/meu-cadastro">
-      Cadastro
-    </button>
-  </div>
+  <ng-container *ngIf="processData$ | async"></ng-container>
+
+  <ng-container *ngIf="isRegisterFinished === true; else noRegister"
+    ><h1>Home Page</h1></ng-container
+  >
+  <ng-template #noRegister>
+    <div class="home__empty">
+      <img src="assets/images/no-data.svg" width="50%" height="50%" />
+      <h3>Seu cadastro está imcompleto, clique em Cadastro para continuar!</h3>
+      <button
+        class="app-button"
+        mat-raised-button
+        color="warn"
+        type="button"
+        routerLink="/meu-cadastro">
+        Cadastro
+      </button>
+    </div>
+  </ng-template>
 </app-layout>

@@ -10,7 +10,7 @@ export const personalValidators = {
   state: ['', [Validators.required, Validators.maxLength(2)]],
   city: ['', Validators.required],
   district: ['', Validators.required],
-  complement: ['', [Validators.required, Validators.maxLength(50)]],
+  complement: ['', [Validators.maxLength(50)]],
   number: ['', Validators.required],
   rg: ['', [Validators.required, Validators.pattern(/[0-9]{9}/)]],
   cpf: ['', [Validators.required, Validators.pattern(/[0-9]{11}/)]],

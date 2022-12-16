@@ -1,0 +1,180 @@
+<div class="register">
+  <ng-container *ngIf="personalData$ | async"></ng-container>
+  <ng-container *ngIf="user$ | async"></ng-container>
+  <ng-container *ngIf="processData$ | async"></ng-container>
+
+  <form [formGroup]="personalForm" class="register__form">
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="name">Nome</mat-label>
+      <input matInput type="text" formControlName="name" required />
+      <mat-icon matSuffix>person_add</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="name"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="email">E-mail</mat-label>
+      <input matInput readonly type="text" placeholder="E-mail" formControlName="email" />
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="sex">Sexo</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option *ngFor="let sex of _registerService.sexOptions" [value]="sex.value">{{
+          sex.viewValue
+        }}</mat-option>
+      </mat-select>
+      <mat-icon matSuffix>people</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="sex"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="birth_date">Data de Nascimento</mat-label>
+      <input matInput [matDatepicker]="birth_date_picker" formControlName="birth_date" />
+
+      <mat-datepicker-toggle matSuffix [for]="birth_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #birth_date_picker color="primary"></mat-datepicker>
+      <mat-error
+        ><app-custom-validation-message controlName="birth_date"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="cep">CEP</mat-label>
+      <input
+        matInput
+        placeholder="CEP"
+        formControlName="cep"
+        (blur)="getAddressDataHandler()"
+        required />
+      <mat-icon matSuffix> add_location</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="cep"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="address">Endereço</mat-label>
+      <input matInput placeholder="Endereço" formControlName="address" required />
+      <mat-icon matSuffix> location_on</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="address"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="district">Bairro</mat-label>
+      <input matInput placeholder="Bairro" formControlName="district" required />
+      <mat-icon matSuffix> location_on</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="district"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="city">Cidade</mat-label>
+      <input matInput placeholder="Cidade" formControlName="city" required />
+      <mat-icon matSuffix>location_city</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="city"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="state">Estado</mat-label>
+      <input matInput placeholder="Estado" formControlName="state" required maxlength="2" />
+      <mat-icon matSuffix> location_on</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="state"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label>Complemento</mat-label>
+      <input
+        matInput
+        placeholder="Complemento"
+        formControlName="complement"
+        required
+        maxLength="50" />
+      <mat-icon matSuffix> location_on</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="complement"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="number">Número</mat-label>
+      <input matInput type="text" placeholder="Número" formControlName="number" required />
+      <mat-error
+        ><app-custom-validation-message controlName="number"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="rg">RG</mat-label>
+      <input matInput type="number" placeholder="RG" formControlName="rg" required />
+      <mat-error
+        ><app-custom-validation-message controlName="rg"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="cpf">CPF</mat-label>
+      <input matInput type="number" placeholder="CPF" formControlName="cpf" required />
+
+      <mat-error
+        ><app-custom-validation-message controlName="cpf"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="number">Celular</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="Celular"
+        formControlName="cellphone"
+        required
+        maxLength="11" />
+      <mat-icon matSuffix>phone_android</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="cellphone"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="number">Telefone</mat-label>
+      <input matInput type="number" placeholder="Telefone" formControlName="telephone" required />
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="telephone"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="naturalness">Naturalidade</mat-label>
+      <input matInput placeholder="Naturalidade" formControlName="naturalness" required />
+      <mat-icon matSuffix>flag</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="naturalness"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div class="register__actions">
+    <button
+      class="app-button"
+      mat-raised-button
+      matStepperNext
+      color="primary"
+      type="button"
+      (click)="sendPersonalData()"
+      [disabled]="personalForm.invalid">
+      Salvar
+    </button>
+  </div>
+</div>

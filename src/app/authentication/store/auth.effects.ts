@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 import { tap } from 'rxjs/operators';
 
@@ -13,7 +10,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as fromApp from '@app/app.state';
 
-import { AuthenticationService } from '@authS/authentication.service';
 import { User } from '@authMd/user.model';
 
 import { StartLoading, StopLoading } from '@sharedSt/loading/loading.actions';
@@ -23,6 +19,7 @@ import { SnackbarService } from '@sharedS/snackbar/snackbar.service';
 import * as auth from 'firebase/auth';
 
 import { AuthActions } from './action-types';
+import { RegisterActions } from '@registerSt/register/action-types';
 import { appRoutes } from '@config/routes/app-routes';
 import { FirebaseAuthUserCredential } from '@authMd/firebase-auth-user-credential.model';
 import { loadMemberData } from '@registerSt/register/register.actions';
@@ -52,9 +49,7 @@ export class AuthEffects {
                 this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
                 this._router.navigateByUrl(appRoutes.HOME);
                 this._store.dispatch(StopLoading());
-                this._snackBarService.openSuccessSnackBar(
-                  'Bem vindo ao Plataforma IPR 😁'
-                );
+                this._snackBarService.openSuccessSnackBar('Bem vindo ao Plataforma IPR 😁');
               }
             })
             .catch(error => {
@@ -106,9 +101,7 @@ export class AuthEffects {
 
                 this._router.navigateByUrl(appRoutes.HOME);
                 this._store.dispatch(StopLoading());
-                this._snackBarService.openSuccessSnackBar(
-                  'Bem vindo ao Plataforma IPR 😁'
-                );
+                this._snackBarService.openSuccessSnackBar('Bem vindo ao Plataforma IPR 😁');
               }
             })
             .catch(error => {
@@ -194,9 +187,10 @@ export class AuthEffects {
           const newUser = action.payload;
 
           const userRef: AngularFirestoreDocument<{ auth: Partial<User> }> =
-            this._angularFirestore.doc(`users_testing/${newUser.userId}`);
+            this._angularFirestore.doc(`users/${newUser.userId}`);
           this._store.dispatch(AuthActions.UpdateProfile({ payload: newUser }));
           this._store.dispatch(AuthActions.SetUserData({ payload: newUser }));
+          this._store.dispatch(RegisterActions.setInitialProcess({ payload: newUser.userId }));
 
           return userRef.set({ auth: newUser }, { merge: true });
         })
@@ -237,7 +231,6 @@ export class AuthEffects {
             this._router.navigateByUrl('/');
             this._store.dispatch(StopLoading());
             this._snackBarService.openSuccessSnackBar('Volte Sempre 😁');
-            //this._store.dispatch(clearBillData());
           });
         })
       ),
@@ -262,7 +255,6 @@ export class AuthEffects {
               } as User;
               this._store.dispatch(AuthActions.SetUserData({ payload: loggedUser }));
               this._store.dispatch(loadMemberData({ payload: uid }));
-              //this._store.dispatch(loadTasks({ payload: uid }));
             }
 
             const isLogged = user !== null ? true : false;
@@ -278,7 +270,6 @@ export class AuthEffects {
     private readonly _angularFirestore: AngularFirestore,
     private readonly _angularFireAuth: AngularFireAuth,
     private readonly _router: Router,
-    private readonly _authService: AuthenticationService,
     private readonly _store: Store<fromApp.AppState>,
     private readonly _snackBarService: SnackbarService
   ) {}

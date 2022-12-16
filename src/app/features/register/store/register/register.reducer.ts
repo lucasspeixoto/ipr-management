@@ -1,7 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Ecclesiastical } from '../../models/ecclesiastical';
-import { Personal } from '../../models/personal';
-import { Supplementary } from '../../models/supplementary';
+import { Ecclesiastical } from '@registerMd/ecclesiastical';
+import { Personal } from '@registerMd/personal';
+import { Supplementary } from '@registerMd/supplementary';
+import { Process } from '../../models/process';
 
 import {
   removeEcclesiastical,
@@ -12,8 +13,10 @@ import {
   setHasEcclesiastical,
   setHasPersonal,
   setHasSupplementary,
+  setInitialProcess,
   setObservation,
   setPersonal,
+  setProcess,
   setSupplementary,
   updateEcclesiastical,
   updatePersonal,
@@ -24,14 +27,8 @@ export interface RegisterState {
   personal: Personal | undefined;
   ecclesiastical: Ecclesiastical | undefined;
   supplementary: Supplementary | undefined;
-  process:
-    | {
-        hasPersonal?: boolean;
-        hasSupplementary?: boolean;
-        hasEcclesiastical?: boolean;
-      }
-    | undefined;
-  observation: string;
+  process: Process | undefined;
+  observation: string | null;
 }
 
 export const initialState: RegisterState = {
@@ -39,7 +36,7 @@ export const initialState: RegisterState = {
   ecclesiastical: undefined,
   supplementary: undefined,
   process: undefined,
-  observation: '',
+  observation: null,
 };
 
 const _registerReducer = createReducer(
@@ -59,7 +56,20 @@ const _registerReducer = createReducer(
       personal: undefined,
     });
   }),
-
+  on(setInitialProcess, _state => {
+    return Object.assign({}, _state, {
+      process: {
+        hasPersonal: false,
+        hasEcclesiastical: false,
+        hasSupplementary: false,
+      },
+    });
+  }),
+  on(setProcess, (_state, { payload }) => {
+    return Object.assign({}, _state, {
+      process: payload,
+    });
+  }),
   on(setEcclesiastical, (_state, { payload }) => {
     return Object.assign({}, _state, {
       ecclesiastical: payload,
@@ -130,12 +140,14 @@ const _registerReducer = createReducer(
     return Object.assign({}, _state, {
       observation: payload,
     });
+  }),
+  on(setProcess, (_state, { payload }) => {
+    return Object.assign({}, _state, {
+      process: payload,
+    });
   })
 );
 
-export function registerReducer(
-  state: RegisterState | undefined,
-  action: Action
-): RegisterState {
+export function registerReducer(state: RegisterState | undefined, action: Action): RegisterState {
   return _registerReducer(state, action);
 }

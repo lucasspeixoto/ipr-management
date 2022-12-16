@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 import { tap } from 'rxjs';
 
@@ -20,8 +17,10 @@ import { SnackbarService } from '@sharedS/snackbar/snackbar.service';
 import { Messages } from '@shared/messages/firebase';
 
 import { Personal } from '@registerMd/personal';
-import { Supplementary } from '../../models/supplementary';
-import { Ecclesiastical } from '../../models/ecclesiastical';
+import { Supplementary } from '@registerMd/supplementary';
+import { Ecclesiastical } from '@registerMd/ecclesiastical';
+import { Process } from '../../models/process';
+import { RegisterActions } from './action-types';
 
 @Injectable()
 export class RegisterEffects {
@@ -39,13 +38,8 @@ export class RegisterEffects {
             .subscribe({
               next: memberData => {
                 if (memberData) {
-                  const {
-                    personal,
-                    supplementary,
-                    ecclesiastical,
-                    process,
-                    observation,
-                  } = memberData!;
+                  const { personal, supplementary, ecclesiastical, process, observation } =
+                    memberData!;
 
                   this._store.dispatch(
                     fromRegister.setPersonal({
@@ -53,18 +47,12 @@ export class RegisterEffects {
                       userId,
                     })
                   );
-                  this._store.dispatch(
-                    fromRegister.setSupplementary({ payload: supplementary })
-                  );
-                  this._store.dispatch(
-                    fromRegister.setEcclesiastical({ payload: ecclesiastical })
-                  );
+                  this._store.dispatch(fromRegister.setSupplementary({ payload: supplementary }));
+                  this._store.dispatch(fromRegister.setEcclesiastical({ payload: ecclesiastical }));
 
                   this._store.dispatch(fromRegister.setProcess({ payload: process }));
 
-                  this._store.dispatch(
-                    fromRegister.setObservation({ payload: observation })
-                  );
+                  this._store.dispatch(fromRegister.setObservation({ payload: observation }));
                 }
 
                 this._store.dispatch(StopLoading());
@@ -124,6 +112,91 @@ export class RegisterEffects {
           }> = this._angularFirestore.doc(`users/${userId}`);
 
           return userRef.set({ ecclesiastical: newUser }, { merge: true });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  public setInitialProcessData$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(RegisterActions.setInitialProcess),
+        tap(async action => {
+          const userId = action.payload;
+
+          const initialProcess = {
+            hasPersonal: false,
+            hasEcclesiastical: false,
+            hasSupplementary: false,
+          };
+
+          const userRef: AngularFirestoreDocument<{ process: Process }> =
+            this._angularFirestore.doc(`users/${userId}`);
+
+          return userRef.set({ process: initialProcess }, { merge: true });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  public setHasPersonal$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(RegisterActions.setHasPersonal),
+        tap(async action => {
+          const { process, userId } = action.payload;
+
+          const newProcess = {
+            ...process,
+            hasPersonal: true,
+          };
+
+          const userRef: AngularFirestoreDocument<{ process: Process }> =
+            this._angularFirestore.doc(`users/${userId}`);
+
+          return userRef.set({ process: newProcess }, { merge: true });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  public setHasSupplementary$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(RegisterActions.setHasSupplementary),
+        tap(async action => {
+          const { process, userId } = action.payload;
+
+          const newProcess = {
+            ...process,
+            hasSupplementary: true,
+          };
+
+          const userRef: AngularFirestoreDocument<{ process: Process }> =
+            this._angularFirestore.doc(`users/${userId}`);
+
+          return userRef.set({ process: newProcess }, { merge: true });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  public setHasEcclesiastical$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(RegisterActions.setHasEcclesiastical),
+        tap(async action => {
+          const { process, userId } = action.payload;
+
+          const newProcess = {
+            ...process,
+            hasEcclesiastical: true,
+          };
+
+          const userRef: AngularFirestoreDocument<{ process: Process }> =
+            this._angularFirestore.doc(`users/${userId}`);
+
+          return userRef.set({ process: newProcess }, { merge: true });
         })
       ),
     { dispatch: false }

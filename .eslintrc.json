@@ -48,7 +48,7 @@
           }
         ],
         "no-unused-vars": "off",
-        "max-len": ["warn", { "code": 90 }],
+        "max-len": ["warn", { "code": 100 }],
         "prettier/prettier": [
           "error",
           {
@@ -60,7 +60,7 @@
             "arrowParens": "avoid",
             "trailingComma": "es5",
             "bracketSameLine": true,
-            "printWidth": 90,
+            "printWidth": 100,
             "endOfLine": "auto"
           }
         ],

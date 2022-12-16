@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 
 import { loginForm } from '@constants/auth-forms';
 import { Store } from '@ngrx/store';
-import { AuthActions } from '@app/authentication/store/action-types';
+import { AuthActions } from '@authSt/action-types';
 
 @Component({
   selector: 'app-login',

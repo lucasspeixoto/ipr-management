@@ -17,6 +17,8 @@ export enum Actions {
   FORGOT_PASSWORD = '[Forgot Password Page] Send user E-mail for change password',
   LOAD_USER = '[App Component] Load logged user',
   LOAD_USER_SUCCESS = '[App Component] Load logged user Success',
+
+  SET_INITIAL_PROCESS = '[AuthEffects] Set Initial Process Data',
 }
 
 export const Login = createAction(Actions.LOGIN, props<{ payload: LoginForm }>());
@@ -42,18 +44,17 @@ export const UpdateIsLoggedStatus = createAction(
   props<{ payload: boolean }>()
 );
 
-export const SetUserData = createAction(
-  Actions.SET_USER_DATA,
-  props<{ payload: Partial<User> }>()
-);
+export const SetUserData = createAction(Actions.SET_USER_DATA, props<{ payload: Partial<User> }>());
 
 export const Logout = createAction(Actions.LOGOUT);
 
-export const ForgotPassword = createAction(
-  Actions.FORGOT_PASSWORD,
-  props<{ payload: string }>()
-);
+export const ForgotPassword = createAction(Actions.FORGOT_PASSWORD, props<{ payload: string }>());
 
 export const LoadUser = createAction(Actions.LOAD_USER);
 
 export const LoadUserSuccess = createAction(Actions.LOAD_USER_SUCCESS);
+
+export const SetInitialProcess = createAction(
+  Actions.SET_INITIAL_PROCESS,
+  props<{ payload: string | undefined }>()
+);

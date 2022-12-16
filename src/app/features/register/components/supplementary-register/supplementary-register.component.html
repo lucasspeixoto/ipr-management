@@ -1,0 +1,114 @@
+<div class="register">
+  <ng-container *ngIf="supplementaryData$ | async"></ng-container>
+  <ng-container *ngIf="processData$ | async"></ng-container>
+
+  <form [formGroup]="supplementaryForm" class="register__form">
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="marital_status">Estado Civil</mat-label>
+      <mat-select formControlName="marital_status">
+        <mat-option *ngFor="let status of _registerService.maritalOptions" [value]="status.value">{{
+          status.viewValue
+        }}</mat-option>
+      </mat-select>
+      <mat-icon matSuffix>people_outline</mat-icon>
+      <mat-error
+        ><app-custom-validation-message
+          controlName="marital_status"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="spouse_name">Nome do Cônjuge</mat-label>
+      <input matInput placeholder="Nome do Cônjuge" formControlName="spouse_name" required />
+      <mat-icon matSuffix>person_add</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="spouse_name"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="wedding_date">Data de Casamento</mat-label>
+      <input matInput [matDatepicker]="wedding_date_picker" formControlName="wedding_date" />
+      <mat-datepicker-toggle matSuffix [for]="wedding_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #wedding_date_picker color="primary"></mat-datepicker>
+      <mat-error
+        ><app-custom-validation-message controlName="wedding_date"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="schooling">Escolaridade</mat-label>
+      <mat-select formControlName="schooling">
+        <mat-option
+          *ngFor="let schooling of _registerService.schoolingOptions"
+          [value]="schooling.value"
+          >{{ schooling.viewValue }}</mat-option
+        >
+      </mat-select>
+      <mat-icon matSuffix>school</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="schooling"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="profession">Profissão</mat-label>
+      <input matInput placeholder="Profissão" formControlName="profession" required minlength="3" />
+      <mat-icon matSuffix>work</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="profession"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="father_name">Nome do Pai</mat-label>
+      <input
+        matInput
+        placeholder="Nome do Pai"
+        formControlName="father_name"
+        required
+        minlength="3" />
+      <mat-icon matSuffix>person_outline</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="father_name"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="container__form-input" color="accent" appearance="fill">
+      <mat-label for="mother_name">Nome da mãe</mat-label>
+      <input
+        matInput
+        placeholder="Nome da mãe"
+        formControlName="mother_name"
+        required
+        minlength="3" />
+      <mat-icon matSuffix>person_outline</mat-icon>
+      <mat-error
+        ><app-custom-validation-message controlName="mother_name"></app-custom-validation-message>
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="register__actions">
+    <button
+      class="app-button"
+      mat-raised-button
+      matStepperPrevious
+      color="warn"
+      type="button"
+      [disabled]="false">
+      Voltar
+    </button>
+
+    <button
+      class="app-button"
+      mat-raised-button
+      matStepperNext
+      color="primary"
+      type="button"
+      [disabled]="supplementaryForm.invalid"
+      (click)="sendSupplementaryData()">
+      Salvar
+    </button>
+  </div>
+</div>

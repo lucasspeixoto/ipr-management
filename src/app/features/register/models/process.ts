@@ -1,5 +1,5 @@
 export type Process = {
-  hasPersonal: boolean;
-  hasEcclesiastical: boolean;
-  hasSupplementary: boolean;
+  hasPersonal?: boolean;
+  hasEcclesiastical?: boolean;
+  hasSupplementary?: boolean;
 };

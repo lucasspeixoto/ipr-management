@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@sharedM/shared.module';
 
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterService } from '../register/services/register.service';
 
 const billsRoutes = [{ path: '', component: HomeComponent }];
 
@@ -22,6 +23,6 @@ const billsRoutes = [{ path: '', component: HomeComponent }];
     EffectsModule.forFeature([]),
   ],
   declarations: [HomeComponent],
-  providers: [],
+  providers: [RegisterService],
 })
 export class HomeModule {}

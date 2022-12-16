@@ -4,7 +4,7 @@ import { Ecclesiastical } from '@registerMd/ecclesiastical';
 import { Process } from '@registerMd/process';
 import { Supplementary } from '@registerMd/supplementary';
 
-export enum registerActions {
+export enum Actions {
   LOAD_DATA = '[Personal] Load Personal Data',
 
   SET_PERSONAL_DATA = '[Personal] Set Personal Data',
@@ -24,60 +24,80 @@ export enum registerActions {
   SET_HAS_SUPPLEMENTARY = '[Process] Set Has Supplementary',
   SET_HAS_ECCLESIASTICAL = '[Process] Set Has Ecclesiastical',
   REMOVE_PROCESS = '[Process] Remove Process Data',
+  SET_INITIAL_PROCESS = '[Process] Set Initial Process Data',
 
   SET_OBSERVATION = '[Observation] Set Observation',
 }
 
-export const loadMemberData = createAction(
-  registerActions.LOAD_DATA,
-  props<{ payload: string | null }>()
-);
+export const loadMemberData = createAction(Actions.LOAD_DATA, props<{ payload: string | null }>());
 
 //? ---------------- Personal ---------------- //
 export const setPersonal = createAction(
-  registerActions.SET_PERSONAL_DATA,
+  Actions.SET_PERSONAL_DATA,
   props<{ payload: Partial<Personal>; userId?: string | null }>()
 );
 export const updatePersonal = createAction(
-  registerActions.UPDATE_PERSONAL_DATA,
+  Actions.UPDATE_PERSONAL_DATA,
   props<{ payload: Partial<Personal>; userId?: string | null }>()
 );
-export const removePersonal = createAction(registerActions.REMOVE_PERSONAL_DATA);
+export const removePersonal = createAction(Actions.REMOVE_PERSONAL_DATA);
 
 //? ---------------- Supplementary ---------------- //
 export const setSupplementary = createAction(
-  registerActions.SET_SUPPLEMENTARY,
+  Actions.SET_SUPPLEMENTARY,
   props<{ payload: Supplementary }>()
 );
 export const updateSupplementary = createAction(
-  registerActions.UPDATE_SUPPLEMENTARY_DATA,
+  Actions.UPDATE_SUPPLEMENTARY_DATA,
   props<{ payload: Partial<Supplementary>; userId?: string | null }>()
 );
-export const removeSupplementary = createAction(registerActions.REMOVE_SUPPLEMENTARY);
+export const removeSupplementary = createAction(Actions.REMOVE_SUPPLEMENTARY);
 
 //? ---------------- Ecclesiastical ---------------- //
 export const setEcclesiastical = createAction(
-  registerActions.SET_ECCLESIASTICAL,
+  Actions.SET_ECCLESIASTICAL,
   props<{ payload: Ecclesiastical }>()
 );
 export const updateEcclesiastical = createAction(
-  registerActions.UPDATE_ECCLESIASTICAL_DATA,
+  Actions.UPDATE_ECCLESIASTICAL_DATA,
   props<{ payload: Partial<Ecclesiastical>; userId?: string | null }>()
 );
-export const removeEcclesiastical = createAction(registerActions.REMOVE_ECCLESIASTICAL);
+export const removeEcclesiastical = createAction(Actions.REMOVE_ECCLESIASTICAL);
 
 //? ---------------- Process ---------------- //
-export const setProcess = createAction(
-  registerActions.SET_PROCESS,
-  props<{ payload: Process }>()
+export const setInitialProcess = createAction(
+  Actions.SET_INITIAL_PROCESS,
+  props<{ payload: string | undefined }>()
 );
-export const setHasPersonal = createAction(registerActions.SET_HAS_PERSONAL);
-export const setHasSupplementary = createAction(registerActions.SET_HAS_SUPPLEMENTARY);
-export const setHasEcclesiastical = createAction(registerActions.SET_HAS_ECCLESIASTICAL);
-export const removeProcess = createAction(registerActions.REMOVE_PROCESS);
+export const setProcess = createAction(Actions.SET_PROCESS, props<{ payload: Process }>());
+export const setHasPersonal = createAction(
+  Actions.SET_HAS_PERSONAL,
+  props<{
+    payload: {
+      process: Process | undefined;
+      userId: string | undefined;
+    };
+  }>()
+);
+export const setHasSupplementary = createAction(
+  Actions.SET_HAS_SUPPLEMENTARY,
+  props<{
+    payload: {
+      process: Process | undefined;
+      userId: string | undefined;
+    };
+  }>()
+);
+export const setHasEcclesiastical = createAction(
+  Actions.SET_HAS_ECCLESIASTICAL,
+  props<{
+    payload: {
+      process: Process | undefined;
+      userId: string | undefined;
+    };
+  }>()
+);
+export const removeProcess = createAction(Actions.REMOVE_PROCESS);
 
 //? ---------------- Observation ---------------- //
-export const setObservation = createAction(
-  registerActions.SET_OBSERVATION,
-  props<{ payload: string }>()
-);
+export const setObservation = createAction(Actions.SET_OBSERVATION, props<{ payload: string }>());
